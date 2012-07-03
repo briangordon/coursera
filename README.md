@@ -1,28 +1,11 @@
 Coursera Downloader
 ===================
-[Coursera] is creating some fantastic, free educational classes (e.g., algorithms, machine learning, natural language processing, SaaS).  This script allows one to batch download lecture resources (e.g., videos, ppt, etc) for a Coursera class.  Given a class name and related cookie file, it scrapes the course listing page to get the week and class names, and then downloads the related materials into appropriately named files and directories.
+[Coursera] is creating some fantastic, free educational classes (e.g., algorithms, machine learning, natural language processing, SaaS).  This script allows one to batch download lecture videos for a Coursera class.  Given a class name, it scrapes the course listing page to get the week and class names, and then downloads the video lectures into appropriately named files and directories.
 
-Why is this helpful?  Before I was using *wget*, but I had the following problems:
+Rather than downloading resources from the class page (which requires an active enrollment and a session cookie), this fork downloads the lecture videos from the course preview section. This 
+means that you can download all lectures from classes you missed, but you won't be able to get lecture notes or the other resources.
 
-1. Video names have a number in them, but this does not correspond to the actual order.  Manually renaming them is a pain.
-2. Using names from the syllabus page provides more informative names.
-3. Using a wget in a forloop picks up extra videos which are not posted/linked, and these are sometimes duplicates.
-
-*DownloadThemAll* can also work, but this provides better names.  
-
-Inspired in part by [youtube-dl] by which I've downloaded many other good videos such those from Khan Academy.  
-
-
-Features
---------
-
-  * Intentionally detailed names, so that it will display and sort properly
-    on most interfaces (e.g., MX Video on Andriod phone).
-  * Regex-based section (week) and lecture name filters to download only
-    certain resources.
-  * File format extension filter to grab resource types you want.
-  * Tested on both Linux and Windows.
-
+Currently it only downloads the mp4 version of each lecture; I may add an argument for selecting the webm version in the future.
 
 Directions
 ----------
@@ -50,10 +33,12 @@ e.g. http://saas-class.org
     Firefox: [Export Cookies 1.2]  
       
 5. Run the script to download the materials.  
-    General:                 `coursera-dl saas -c cookies.txt`  
-    Filter by section name:  `coursera-dl saas -c cookies.txt -sf "Chapter_Four"`  
-    Filter by lecture name:  `coursera-dl saas -c cookies.txt -lf "3.1_"`  
-    Download only ppt files: `coursera-dl saas -c cookies.txt -f "ppt"`  
+    General:                 `coursera-dl saas`  
+    Filter by section name:  `coursera-dl saas -sf "Chapter_Four"`  
+    Filter by lecture name:  `coursera-dl saas -lf "3.1_"`  
+    Download only ppt files: `coursera-dl saas -f "ppt"`
+
+NB: I recommend using the argument `-w wget` (if wget is in your PATH) so that it uses wget to download videos.
 
 
 Troubleshooting
